@@ -74,10 +74,10 @@ async def health():
 
 if __name__ == "__main__":
     import uvicorn
-    
+
     # Development mode detection
     is_development = os.getenv("ENVIRONMENT", "development") == "development"
-    
+
     uvicorn.run(
         "main:app",
         host=settings.SERVER_HOST,
@@ -86,39 +86,3 @@ if __name__ == "__main__":
         workers=1 if is_development else 4,
         log_level="debug" if is_development else "info",
     )
-    elapsed = int(time.time() - session_start_time)
-    if elapsed < GRACE_PERIOD:
-        cv2.putText(
-            annotated_frame,
-            f"Grace Period: {GRACE_PERIOD - elapsed}s",
-            (30, 40),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1,
-            (0, 255, 0),
-            3
-        )
-
-    # --------------------------------------------------
-    # 🔢 Warning counter
-    # --------------------------------------------------
-    cv2.putText(
-        annotated_frame,
-        f"Warnings: {warning_count}/{MAX_WARNINGS}",
-        (30, 260),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        1,
-        (0, 0, 255),
-        3
-    )
-
-    if warning_count >= MAX_WARNINGS:
-        log_event(log_file, "DISQUALIFIED", "Too many warnings", warning_count)
-        save_screenshot(frame, session_id, "Too_many_warnings")
-        break
-
-    cv2.imshow("AI Proctoring System", annotated_frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
