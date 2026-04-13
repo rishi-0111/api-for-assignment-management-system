@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { Suspense, useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import gsap from 'gsap';
@@ -68,9 +68,9 @@ const SC: Record<string, string> = { active: 'text-emerald-400 bg-emerald-500/10
 const EC: Record<string, string> = { active: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20', completed: 'text-blue-400 bg-blue-500/10 border-blue-500/20', draft: 'text-amber-400 bg-amber-500/10 border-amber-500/20', cancelled: 'text-red-400 bg-red-500/10 border-red-500/20' };
 
 /* ════════════════════════════════════════════
-   ADMIN DASHBOARD
+   ADMIN DASHBOARD - CLIENT COMPONENT
 ════════════════════════════════════════════ */
-export default function AdminDashboard() {
+function AdminDashboardContent() {
   const { user, loadFromStorage } = useAuthStore();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -729,5 +729,14 @@ export default function AdminDashboard() {
         </Modal>
       )}
     </DashboardLayout>
+  );
+}
+
+// Wrapper to handle Suspense boundary for useSearchParams()
+export default function AdminDashboard() {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" /></div>}>
+      <AdminDashboardContent />
+    </Suspense>
   );
 }
