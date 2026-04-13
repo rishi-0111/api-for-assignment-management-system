@@ -1,5 +1,5 @@
 # Backend Server Dockerfile
-# Last updated: April 13, 2026 - Force rebuild v2
+# Last updated: April 13, 2026 - Rebuild v3 with fixed versions
 FROM python:3.12-slim
 
 WORKDIR /app
