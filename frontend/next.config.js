@@ -1,6 +1,5 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+// Next.js Configuration
+const nextConfig = {
   // Production optimization
   compress: true,
   
@@ -51,4 +50,4 @@ const nextConfig: NextConfig = {
   skipProxyUrlNormalize: true,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
