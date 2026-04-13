@@ -1,11 +1,12 @@
 /**
- * TestGuard - API Client
- * Axios-based HTTP client with JWT token management.
+ * ProctorForge AI - API Client
+ * Axios-based HTTP client with JWT token management for backend API calls.
  */
 
 import axios from 'axios';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8001';
+// Use environment variable for backend URL (set via .env.local or Vercel dashboard)
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
 
 const api = axios.create({
   baseURL: API_BASE,
