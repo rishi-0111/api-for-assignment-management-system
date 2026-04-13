@@ -1,5 +1,5 @@
 # Backend Server Dockerfile
-# Last updated: April 13, 2026 - Clean rebuild (removed conflicting requirements.txt files)
+# Last updated: April 13, 2026 - Removed old cv2 webcam code from main.py
 FROM python:3.12-slim
 
 WORKDIR /app
