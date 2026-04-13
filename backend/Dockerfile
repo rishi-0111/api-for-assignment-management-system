@@ -1,4 +1,5 @@
 # Backend Server Dockerfile
+# Last updated: April 13, 2026 - Optimized requirements
 FROM python:3.12-slim
 
 WORKDIR /app
